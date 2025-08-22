@@ -1,0 +1,295 @@
+/* Styles for the blackboard component */
+
+/* Full screen mode styles */
+.fullscreen-blackboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: #121520;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  animation: fullscreen-fade-in 0.3s ease-in-out;
+}
+
+@keyframes fullscreen-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Main blackboard container with glow effect */
+.blackboard-container {
+  position: relative;
+  animation: blackboard-container-glow 4s infinite alternate;
+  border: 1px solid rgba(155, 135, 245, 0.15);
+}
+
+@keyframes blackboard-container-glow {
+  0% {
+    box-shadow: 0 0 15px rgba(155, 135, 245, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(155, 135, 245, 0.5);
+  }
+}
+
+/* Canvas area with glow effect */
+.blackboard-canvas-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(155, 135, 245, 0.2);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.blackboard-canvas-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(155, 135, 245, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blackboard-canvas-container:hover::before {
+  animation: canvas-pulse 3s infinite alternate;
+}
+
+@keyframes canvas-pulse {
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Blackboard title with glow effect */
+.blackboard-title {
+  position: relative;
+  text-shadow: 0 0 10px rgba(155, 135, 245, 0.5);
+  animation: title-pulse 3s infinite alternate;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.blackboard-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(155, 135, 245, 0.8), transparent);
+  animation: title-line 3s infinite;
+}
+
+@keyframes title-pulse {
+  0% {
+    text-shadow: 0 0 5px rgba(155, 135, 245, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(155, 135, 245, 0.8);
+  }
+}
+
+@keyframes title-line {
+  0% {
+    transform: scaleX(0.3);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.3);
+    opacity: 0.3;
+  }
+}
+
+/* Blackboard buttons with glow effect */
+.blackboard-button {
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.blackboard-button::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: transparent;
+  border-radius: inherit;
+  z-index: -1;
+  box-shadow: 0 0 0 rgba(155, 135, 245, 0);
+  transition: box-shadow 0.3s ease;
+}
+
+.blackboard-button:hover::after {
+  box-shadow: 0 0 15px rgba(155, 135, 245, 0.8);
+}
+
+.blackboard-button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.blackboard-button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* Primary button (Get Hint) with special glow */
+.blackboard-button-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.blackboard-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.7s ease;
+}
+
+.blackboard-button-primary:hover::before {
+  left: 100%;
+}
+
+/* AI hint message with glow effect */
+.ai-hint {
+  animation: hint-glow 2s infinite alternate;
+  border: 1px solid rgba(155, 135, 245, 0.3);
+}
+
+@keyframes hint-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(155, 135, 245, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(155, 135, 245, 0.6);
+  }
+}
+
+/* Drawing effect for the canvas */
+.drawing-effect {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: drawing-fade 0.5s ease-out;
+}
+
+@keyframes drawing-fade {
+  0% {
+    opacity: 0.8;
+    width: 5px;
+    height: 5px;
+  }
+  100% {
+    opacity: 0;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Floating toolbar in full screen mode */
+.floating-toolbar {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(26, 31, 44, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(155, 135, 245, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(155, 135, 245, 0.2);
+  z-index: 20;
+  animation: toolbar-fade-in 0.3s ease-out;
+  transition: all 0.3s ease;
+}
+
+.floating-toolbar:hover {
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(155, 135, 245, 0.3);
+}
+
+@keyframes toolbar-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Zoom percentage display */
+.floating-toolbar .text-xs {
+  font-family: monospace;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Full screen canvas container */
+.fullscreen-canvas-container {
+  position: relative;
+  flex: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(155, 135, 245, 0.3);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(155, 135, 245, 0.3);
+  animation: canvas-glow 4s infinite alternate;
+}
+
+@keyframes canvas-glow {
+  0% {
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(155, 135, 245, 0.2);
+  }
+  100% {
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), 0 0 40px rgba(155, 135, 245, 0.4);
+  }
+}
+
+/* Cursor styles */
+.cursor-crosshair {
+  cursor: crosshair;
+}
+
+.cursor-move {
+  cursor: move;
+  cursor: grab;
+}
+
+.cursor-move:active {
+  cursor: grabbing;
+}

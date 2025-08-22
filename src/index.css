@@ -1,0 +1,283 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 25% 14%;
+    --foreground: 0 0% 100%;
+
+    --card: 225 25% 14%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 225 25% 14%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 255 82% 74%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 32% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 225 5% 57%;
+    --muted-foreground: 0 0% 85%;
+
+    --accent: 260 91% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 225 25% 24%;
+    --input: 225 25% 24%;
+    --ring: 255 82% 74%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-primary/20 selection:text-white;
+  }
+
+  body {
+    @apply bg-calculator-bg text-calculator-text antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply scroll-smooth overflow-x-hidden;
+  }
+
+  #root {
+    @apply min-h-screen w-full overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+
+  /* Calculator container with glowing effects */
+  .calculator-container {
+    @apply relative overflow-hidden rounded-2xl mb-4;
+    box-shadow: 0 0 20px rgba(155, 135, 245, 0.2);
+    animation: calculator-glow 3s infinite alternate;
+  }
+
+  .calculator-display-container {
+    @apply relative z-20;
+  }
+
+  .calculator-display {
+    @apply relative z-10;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.3);
+    background: rgba(25, 30, 45, 0.95);
+    border: 1px solid rgba(155, 135, 245, 0.15);
+  }
+
+  /* Expression section styling */
+  .calculator-expression-container {
+    position: relative;
+    min-height: 2.2rem;
+    border-bottom: 1px solid rgba(155, 135, 245, 0.1);
+  }
+
+  /* Result section styling */
+  .calculator-result-container {
+    position: relative;
+    min-height: 3.5rem;
+    padding-top: 0.25rem;
+  }
+
+  /* Simple transition for result changes */
+  #calculator-result {
+    transition: all 0.2s ease-out;
+  }
+
+  #calculator-result.changed {
+    color: rgba(155, 135, 245, 1);
+    transition: color 0.5s ease-out;
+  }
+
+  .calculator-keypad {
+    @apply relative z-0;
+    margin-top: 0;
+  }
+
+  @keyframes calculator-glow {
+    0% {
+      box-shadow: 0 0 15px rgba(155, 135, 245, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 25px rgba(155, 135, 245, 0.6);
+    }
+  }
+
+  .calculator-button {
+    @apply flex items-center justify-center rounded-xl bg-calculator-button h-14 text-xl font-medium transition-all hover:bg-opacity-80 active:scale-95;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .calculator-button-operator {
+    @apply calculator-button bg-calculator-operator text-white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .calculator-button-equal {
+    @apply calculator-button bg-calculator-primary text-white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(155, 135, 245, 0.3);
+  }
+
+  .calculator-button-function {
+    @apply calculator-button bg-calculator-secondary text-white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+  }
+
+  .calculator-button-clear {
+    @apply calculator-button bg-red-500/80 text-white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .calculator-key {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .calculator-key::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .calculator-key:hover::after {
+    opacity: 1;
+  }
+
+  .calculator-key-pressed {
+    animation: key-press 0.1s ease-out;
+  }
+
+  @keyframes key-press {
+    0% {
+      background-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+      background-color: inherit;
+      box-shadow: inherit;
+    }
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Navigation bar glow effects */
+  .nav-item-active {
+    position: relative;
+  }
+
+  .nav-item-active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background-color: hsl(var(--primary));
+    border-radius: 4px;
+    box-shadow: 0 0 8px 2px rgba(155, 135, 245, 0.6);
+  }
+
+  .nav-icon-glow {
+    filter: drop-shadow(0 0 4px rgba(155, 135, 245, 0.8));
+  }
+
+  /* App logo styling and animations */
+  .app-logo {
+    position: relative;
+    text-shadow: 0 0 10px rgba(155, 135, 245, 0.5);
+    animation: logo-pulse 3s infinite alternate;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.05), rgba(155, 135, 245, 0.01));
+    border-left: 2px solid rgba(155, 135, 245, 0.3);
+  }
+
+  .app-logo::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(155, 135, 245, 0.8), transparent);
+    animation: logo-line 3s infinite;
+  }
+
+  .app-logo::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, rgba(155, 135, 245, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: logo-glow 4s infinite alternate;
+  }
+
+  @keyframes logo-pulse {
+    0% {
+      text-shadow: 0 0 5px rgba(155, 135, 245, 0.4);
+    }
+    100% {
+      text-shadow: 0 0 15px rgba(155, 135, 245, 0.8);
+    }
+  }
+
+  @keyframes logo-line {
+    0% {
+      transform: scaleX(0.3);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(0.3);
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes logo-glow {
+    0% {
+      opacity: 0.3;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  }
+}

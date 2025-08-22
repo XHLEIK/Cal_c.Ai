@@ -1,0 +1,396 @@
+/* Styles for the math chat component */
+
+.math-content {
+  font-family: 'Roboto Mono', monospace, 'Courier New', Courier;
+  line-height: 1.5;
+}
+
+.math-content p {
+  margin-bottom: 0.5rem;
+}
+
+/* Style for equations */
+.math-content p:has(code) {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+/* Style for section headers */
+.math-content p:has(strong) {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+/* Style for step numbers */
+.math-content p:has(em) {
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+
+/* Scrollbar styling for math content */
+.math-content::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.math-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.math-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.math-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Styling for the chat container */
+.chat-container {
+  height: calc(100vh - 180px); /* Adjusted to account for bottom navigation, header, and safe area */
+  position: relative;
+  margin-bottom: 0;
+  max-height: 100%;
+  overflow: hidden;
+  padding-bottom: 70px; /* Space for the fixed input bar */
+  animation: chat-container-glow 4s infinite alternate;
+}
+
+/* Ensure the main chat container and the glass-morphism container have the same height */
+.chat-container > .glass-morphism {
+  height: 100%;
+}
+
+/* Glowing animation for the chat container */
+@keyframes chat-container-glow {
+  0% {
+    box-shadow: 0 0 15px rgba(155, 135, 245, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(155, 135, 245, 0.5);
+  }
+}
+
+/* Styling for the messages container */
+.messages-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px; /* Reduced padding since we have a fixed input bar now */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  overflow-x: hidden;
+}
+
+/* Styling for the fixed input bar at the bottom */
+.fixed-input-bar {
+  position: fixed;
+  bottom: 70px; /* Position above the bottom navigation bar */
+  left: 0;
+  right: 0;
+  background-color: #1A1F2C; /* Solid background matching the app theme */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 50; /* Higher z-index to ensure it stays above other elements */
+  padding: 0;
+  width: 100%;
+  backdrop-filter: blur(8px);
+  animation: input-bar-glow 4s infinite alternate;
+}
+
+/* Glowing animation for the input bar */
+@keyframes input-bar-glow {
+  0% {
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 -4px 20px rgba(155, 135, 245, 0.2);
+  }
+}
+
+/* Add a glass effect to the input bar */
+.fixed-input-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(26, 31, 44, 0.8), rgba(26, 31, 44, 0.95));
+  z-index: -1;
+}
+
+/* Styling for code blocks */
+.math-content code {
+  font-family: 'Roboto Mono', monospace;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+}
+
+/* Styling for equations */
+.math-content p.font-mono {
+  font-family: 'Roboto Mono', monospace;
+  overflow-x: auto;
+  white-space: pre;
+  scrollbar-width: thin;
+}
+
+/* Styling for bold text (headers) */
+.math-content p.font-bold {
+  margin-top: 0.75rem;
+  color: #9b87f5;
+}
+
+/* Styling for emphasized text */
+.math-content em {
+  color: #9b87f5;
+  font-style: italic;
+}
+
+/* Styling for fractions */
+.math-content .fraction {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.math-content .fraction .numerator {
+  border-bottom: 1px solid;
+  padding: 0 0.1em;
+}
+
+.math-content .fraction .denominator {
+  padding: 0 0.1em;
+}
+
+/* Styling for numbered steps */
+.math-content p.step {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Styling for final answer */
+.math-content p.final-answer {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(155, 135, 245, 0.1);
+  border-left: 3px solid #9b87f5;
+  font-weight: 500;
+}
+
+/* Styling for AI chat title with glow effect */
+.ai-chat-title {
+  position: relative;
+  text-shadow: 0 0 10px rgba(155, 135, 245, 0.5);
+  animation: title-pulse 3s infinite alternate;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.ai-chat-title::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(155, 135, 245, 0.8), transparent);
+  animation: title-line 3s infinite;
+}
+
+@keyframes title-pulse {
+  0% {
+    text-shadow: 0 0 5px rgba(155, 135, 245, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(155, 135, 245, 0.8);
+  }
+}
+
+@keyframes title-line {
+  0% {
+    transform: scaleX(0.3);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.3);
+    opacity: 0.3;
+  }
+}
+
+/* Styling for AI messages with glow effect */
+.messages-container .bg-calculator-button {
+  position: relative;
+  overflow: visible;
+}
+
+.messages-container .bg-calculator-button::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: transparent;
+  border-radius: inherit;
+  z-index: -1;
+  animation: ai-message-glow 3s infinite alternate;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.messages-container .bg-calculator-button:hover::after {
+  opacity: 1;
+}
+
+@keyframes ai-message-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(155, 135, 245, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(155, 135, 245, 0.6);
+  }
+}
+
+/* Styling for example suggestions container */
+.messages-container .glass-morphism {
+  border: 1px solid rgba(155, 135, 245, 0.15);
+  box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.2);
+  animation: suggestions-glow 4s infinite alternate;
+}
+
+@keyframes suggestions-glow {
+  0% {
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 4px 20px -5px rgba(155, 135, 245, 0.3);
+  }
+}
+
+/* Styling for example suggestion buttons with glow effect */
+.example-suggestion {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.example-suggestion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(155, 135, 245, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.example-suggestion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(155, 135, 245, 0.3);
+}
+
+.example-suggestion:hover::before {
+  opacity: 1;
+  animation: suggestion-pulse 1.5s infinite alternate;
+}
+
+@keyframes suggestion-pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Styling for the send button with glow effect */
+.fixed-input-bar button {
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
+}
+
+.fixed-input-bar button::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: transparent;
+  border-radius: inherit;
+  z-index: -1;
+  box-shadow: 0 0 0 rgba(155, 135, 245, 0);
+  transition: box-shadow 0.3s ease;
+}
+
+.fixed-input-bar button:hover::after {
+  box-shadow: 0 0 15px rgba(155, 135, 245, 0.8);
+}
+
+.fixed-input-bar button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.fixed-input-bar button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* Media queries for responsive design */
+@media (max-height: 700px) {
+  .chat-container {
+    height: calc(100vh - 160px);
+  }
+
+  .fixed-input-bar {
+    bottom: 60px;
+  }
+}
+
+@media (max-height: 600px) {
+  .chat-container {
+    height: calc(100vh - 140px);
+  }
+
+  .fixed-input-bar {
+    bottom: 55px;
+  }
+
+  .fixed-input-bar .flex {
+    padding: 8px 12px;
+  }
+}
+
+/* Fix for iOS devices with notch */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .fixed-input-bar {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Fix for smaller devices */
+@media (max-width: 360px) {
+  .fixed-input-bar .flex {
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .fixed-input-bar input {
+    padding: 8px;
+  }
+
+  .fixed-input-bar button {
+    padding: 8px;
+  }
+}
