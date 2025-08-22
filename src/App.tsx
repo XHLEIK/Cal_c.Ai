@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import EmailVerificationHandler from "@/components/auth/EmailVerificationHandler";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { SpeedInsights } from "@vercel/speed-insights/react"; // ✅ Added Speed Insights
 
 // Pages
 import Index from "./pages/Index";
@@ -45,16 +45,22 @@ const App = () => (
                 <Route path="/auth/verify" element={<EmailVerificationHandler />} />
 
                 {/* Protected routes */}
-                <Route path="/chat" element={
-                  <ProtectedRoute>
-                    <ChatPage />
-                  </ProtectedRoute>
-                } />
-                <Route path="/board" element={
-                  <ProtectedRoute>
-                    <BlackboardPage />
-                  </ProtectedRoute>
-                } />
+                <Route
+                  path="/chat"
+                  element={
+                    <ProtectedRoute>
+                      <ChatPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/board"
+                  element={
+                    <ProtectedRoute>
+                      <BlackboardPage />
+                    </ProtectedRoute>
+                  }
+                />
 
                 {/* 404 route */}
                 <Route path="*" element={<NotFound />} />
@@ -64,6 +70,9 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </BrowserRouter>
+
+    {/* ✅ Add Speed Insights here */}
+    <SpeedInsights />
   </ErrorBoundary>
 );
 
