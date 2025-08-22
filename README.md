@@ -4,6 +4,10 @@
   <img src="public/cal_cai-logo.png" alt="CalC.Ai Logo" width="300" />
   <h3>Smart calculations, intelligent assistance, seamless experience</h3>
 </div>
+<p align="center">
+  <a href="https://cal-c-ai.vercel.app/" target="_blank">Visit the live site →</a>
+</p>
+
 
 ## 🌟 Overview
 
